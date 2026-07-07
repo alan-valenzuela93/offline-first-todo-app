@@ -33,34 +33,34 @@ class TaskListSectionHeader extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(child: title),
-                  const SizedBox(width: 12),
-                  action,
-                ],
-              ),
-              const SizedBox(height: 10),
+              title,
+              const SizedBox(height: 12),
               syncStatus,
+              const SizedBox(height: 12),
+              action,
             ],
           );
         }
 
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Expanded(child: title),
-            const SizedBox(width: 18),
-            Flexible(
-              flex: 0,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(child: title),
+                const SizedBox(width: 18),
+                action,
+              ],
+            ),
+            const SizedBox(height: 12),
+            Align(
+              alignment: Alignment.centerLeft,
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 380),
+                constraints: const BoxConstraints(maxWidth: 460),
                 child: syncStatus,
               ),
             ),
-            const SizedBox(width: 12),
-            action,
           ],
         );
       },
