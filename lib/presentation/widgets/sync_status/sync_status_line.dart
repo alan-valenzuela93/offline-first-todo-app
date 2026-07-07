@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../controllers/task_controller.dart';
+import '../../controllers/task_controller.dart';
 
 class SyncStatusLine extends StatelessWidget {
   const SyncStatusLine({
@@ -19,9 +19,9 @@ class SyncStatusLine extends StatelessWidget {
       SyncUiState.syncing => (Icons.sync_rounded, colorScheme.primary),
       SyncUiState.synced => (Icons.cloud_done_outlined, colorScheme.primary),
       SyncUiState.localOnly => (
-          Icons.cloud_off_outlined,
-          colorScheme.onSurfaceVariant,
-        ),
+        Icons.cloud_off_outlined,
+        colorScheme.onSurfaceVariant,
+      ),
       SyncUiState.error => (Icons.error_outline, colorScheme.error),
       SyncUiState.idle => (Icons.save_outlined, colorScheme.onSurfaceVariant),
     };
@@ -52,9 +52,9 @@ class SyncStatusLine extends StatelessWidget {
                 controller.syncMessage,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
-                      fontWeight: FontWeight.w700,
-                    ),
+                  color: colorScheme.onSurfaceVariant,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
             const SizedBox(width: 8),

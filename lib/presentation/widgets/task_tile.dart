@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/models/task.dart';
-import 'sync_status_badge.dart';
+import 'sync_status/sync_status_badge.dart';
+import 'task_tile/task_checkbox.dart';
 
 class TaskTile extends StatelessWidget {
   const TaskTile({
@@ -115,7 +116,7 @@ class TaskTile extends StatelessWidget {
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  _TaskCheckbox(
+                                  TaskCheckbox(
                                     value: task.completed,
                                     onChanged: onToggle,
                                   ),
@@ -133,7 +134,7 @@ class TaskTile extends StatelessWidget {
                         : Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              _TaskCheckbox(
+                              TaskCheckbox(
                                 value: task.completed,
                                 onChanged: onToggle,
                               ),
@@ -149,26 +150,6 @@ class TaskTile extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _TaskCheckbox extends StatelessWidget {
-  const _TaskCheckbox({required this.value, required this.onChanged});
-
-  final bool value;
-  final VoidCallback onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox.square(
-      dimension: 42,
-      child: Checkbox(
-        value: value,
-        shape: const CircleBorder(),
-        side: const BorderSide(width: 1.7, color: Color(0xFF6D7D7A)),
-        onChanged: (_) => onChanged(),
       ),
     );
   }

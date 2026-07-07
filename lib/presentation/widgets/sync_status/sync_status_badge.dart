@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../domain/models/sync_status.dart';
+import '../../../domain/models/sync_status.dart';
 
 class SyncStatusBadge extends StatelessWidget {
   const SyncStatusBadge({super.key, required this.status});
