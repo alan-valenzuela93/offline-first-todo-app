@@ -6,6 +6,8 @@ La app guarda cada cambio primero en el navegador, usando SQLite Web mediante We
 
 El proyecto está pensado como demo de portfolio: alcance chico, arquitectura clara, comportamiento offline real.
 
+Esta demo usa SQLite Web mediante WebAssembly como desafío técnico, pero incluye fallback automático para que el link público siga funcionando incluso si el navegador o el hosting tienen problemas con WASM o workers.
+
 ## Qué Demuestra
 
 - Flujo offline-first para crear, editar, completar y eliminar tareas.
@@ -219,47 +221,6 @@ Flujo sugerido:
 - Verificar la fila en Supabase.
 - Modificar una fila desde Supabase y volver a sincronizar.
 
-## Compilar Web
-
-```bash
-flutter build web \
-  --dart-define=PROJECT_ID=tu-project-id \
-  --dart-define=ANON_KEY=tu-anon-key
-```
-
-La salida queda en:
-
-```txt
-build/web
-```
-
-## Deploy
-
-Para Netlify, Vercel u otro hosting estático:
-
-- Build command: `flutter build web --dart-define=PROJECT_ID=... --dart-define=ANON_KEY=...`
-- Publish directory: `build/web`
-
-Confirmar que el deploy incluya:
-
-```txt
-sqlite3.wasm
-sqflite_sw.js
-```
-
-## Checklist Post-Deploy
-
-- Abrir la app en una ventana incógnita.
-- Revisar la consola del navegador por errores de WASM o worker.
-- Confirmar que no hay 404 para `sqlite3.wasm`.
-- Confirmar que no hay 404 para `sqflite_sw.js`.
-- Crear una tarea.
-- Refrescar la página.
-- Confirmar que la tarea persiste.
-- Confirmar que sincroniza contra Supabase.
-- Probar en desktop y mobile.
-- Probar con datos del sitio limpiados.
-
 ## Troubleshooting
 
 ### "Supabase no esta configurado"
@@ -291,6 +252,3 @@ localhost:8081
 
 son orígenes distintos y tienen almacenamiento separado.
 
-## Nota Final
-
-Esta demo usa SQLite Web mediante WebAssembly como desafío técnico, pero incluye fallback automático para que el link público siga funcionando incluso si el navegador o el hosting tienen problemas con WASM o workers.
