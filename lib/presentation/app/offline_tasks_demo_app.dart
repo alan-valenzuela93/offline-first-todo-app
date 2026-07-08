@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../controllers/task_controller.dart';
-import '../pages/task_list_page.dart';
+import '../pages/task_list_page/task_list_page.dart';
 import '../theme/app_theme.dart';
 
 class OfflineTasksDemoApp extends StatelessWidget {
