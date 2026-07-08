@@ -6,54 +6,71 @@ class StatPill extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.value,
-    this.accent = const Color(0xFFDCEFEB),
+    this.accent,
+    this.iconColor,
   });
 
   final IconData icon;
   final String label;
   final String value;
-  final Color accent;
+  final Color? accent;
+  final Color? iconColor;
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final fallbackAccent = accent ?? colorScheme.primaryContainer;
+    final fallbackIconColor = iconColor ?? colorScheme.primary;
+
+    return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFFF8FAF8),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE1E8E5)),
+        border: Border.all(color: colorScheme.outlineVariant.withOpacity(0.5)),
+        boxShadow: [
+          BoxShadow(
+            color: colorScheme.shadow.withOpacity(0.02),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             DecoratedBox(
               decoration: BoxDecoration(
-                color: accent,
+                color: fallbackAccent,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(6),
-                child: Icon(icon, size: 15, color: const Color(0xFF202725)),
+                padding: const EdgeInsets.all(8),
+                child: Icon(icon, size: 16, color: fallbackIconColor),
               ),
             ),
-            const SizedBox(width: 8),
+            const SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   value,
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w900,
-                        height: 1,
-                      ),
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w900,
+                    color: colorScheme.onSurface,
+                    height: 1.1,
+                  ),
                 ),
+                const SizedBox(height: 2),
                 Text(
                   label,
-                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        fontWeight: FontWeight.w700,
-                      ),
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ],
             ),

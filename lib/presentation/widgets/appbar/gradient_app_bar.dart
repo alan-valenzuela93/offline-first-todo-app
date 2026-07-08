@@ -11,15 +11,15 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
     return DecoratedBox(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-          colors: [Color(0xFF1F6F66), Color(0xFF287C72), Color(0xFF3E9A89)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFF312E81), Color(0xFF4F46E5), Color(0xFF6366F1)], // Deep Indigo gradient
         ),
         boxShadow: [
           BoxShadow(
-            color: Color(0x1F1F6F66),
-            blurRadius: 18,
-            offset: Offset(0, 8),
+            color: Color(0x2A312E81),
+            blurRadius: 16,
+            offset: Offset(0, 4),
           ),
         ],
       ),

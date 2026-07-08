@@ -10,41 +10,52 @@ class StorageEngineBadge extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final isFallback = storageEngineName.toLowerCase().contains('fallback');
     final title = isFallback
-        ? 'Datos guardados en el navegador'
-        : 'Datos guardados con SQLite Web';
+        ? 'Datos en almacenamiento local'
+        : 'Datos en SQLite Web';
     final description = isFallback
-        ? 'La app usa un respaldo local porque SQLite Web no inicio.'
-        : 'Las tareas se guardan localmente antes de sincronizar.';
+        ? 'La app usa LocalStorage porque SQLite Web no se pudo iniciar.'
+        : 'Las tareas se guardan localmente usando una base de datos SQLite FFI.';
 
-    return DecoratedBox(
+    final themeColor = isFallback ? const Color(0xFFEC4899) : const Color(0xFF10B981); // Pink or Emerald
+    final containerColor = isFallback ? const Color(0xFFFDF2F8) : const Color(0xFFECFDF5); // Light Pink or Light Emerald
+    final iconData = isFallback ? Icons.warning_amber_rounded : Icons.dns_rounded;
+
+    return Container(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isFallback ? const Color(0xFFE7CFD9) : const Color(0xFFD2E6E1),
+          color: themeColor.withOpacity(0.24),
+          width: 1.2,
         ),
+        boxShadow: [
+          BoxShadow(
+            color: colorScheme.shadow.withOpacity(0.02),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(14),
+        padding: const EdgeInsets.all(16),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DecoratedBox(
               decoration: BoxDecoration(
-                color: isFallback
-                    ? colorScheme.tertiaryContainer
-                    : colorScheme.primaryContainer,
+                color: containerColor,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(10),
                 child: Icon(
-                  isFallback ? Icons.storage_outlined : Icons.dataset_outlined,
-                  size: 18,
+                  iconData,
+                  size: 20,
+                  color: themeColor,
                 ),
               ),
             ),
-            const SizedBox(width: 12),
+            const SizedBox(width: 14),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,6 +64,7 @@ class StorageEngineBadge extends StatelessWidget {
                     title,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.w900,
+                      color: colorScheme.onSurface,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -60,15 +72,22 @@ class StorageEngineBadge extends StatelessWidget {
                     description,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: colorScheme.onSurfaceVariant,
-                      height: 1.25,
+                      height: 1.3,
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Motor: $storageEngineName',
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: colorScheme.primary,
-                      fontWeight: FontWeight.w800,
+                  const SizedBox(height: 10),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: containerColor,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    child: Text(
+                      'Motor: $storageEngineName',
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: themeColor,
+                        fontWeight: FontWeight.w900,
+                      ),
                     ),
                   ),
                 ],

@@ -17,20 +17,27 @@ class SyncStatusLine extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final (icon, color) = switch (controller.syncUiState) {
       SyncUiState.syncing => (Icons.sync_rounded, colorScheme.primary),
-      SyncUiState.synced => (Icons.cloud_done_outlined, colorScheme.primary),
+      SyncUiState.synced => (Icons.cloud_done_rounded, const Color(0xFF10B981)), // Emerald
       SyncUiState.localOnly => (
-        Icons.cloud_off_outlined,
+        Icons.cloud_off_rounded,
         colorScheme.onSurfaceVariant,
       ),
-      SyncUiState.error => (Icons.error_outline, colorScheme.error),
-      SyncUiState.idle => (Icons.save_outlined, colorScheme.onSurfaceVariant),
+      SyncUiState.error => (Icons.error_outline_rounded, colorScheme.error),
+      SyncUiState.idle => (Icons.cloud_outlined, colorScheme.onSurfaceVariant),
     };
 
-    return DecoratedBox(
+    return Container(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE1E8E5)),
+        border: Border.all(color: colorScheme.outlineVariant.withOpacity(0.5)),
+        boxShadow: [
+          BoxShadow(
+            color: colorScheme.shadow.withOpacity(0.015),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:offline_tasks_demo/presentation/widgets/appbar/gradient_app_bar.dart';
 
-import '../controllers/task_controller.dart';
-import '../widgets/responsive_page_container.dart';
-import '../widgets/task_form_dialog.dart';
-import '../widgets/task_page_content.dart';
+import '../../controllers/task_controller.dart';
+import '../../responsive/responsive_page_container.dart';
+import 'widgets/task_form_dialog.dart';
+import 'widgets/task_page_content.dart';
 
 class TaskListPage extends StatelessWidget {
   const TaskListPage({super.key, required this.controller});

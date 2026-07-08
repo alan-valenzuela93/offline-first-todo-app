@@ -12,21 +12,21 @@ class SyncStatusBadge extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final (color, foreground, icon) = switch (status) {
       SyncStatus.synced => (
-        const Color(0xFFDDF2ED),
-        const Color(0xFF15524B),
-        Icons.cloud_done_outlined,
+        const Color(0xFFECFDF5), // Emerald 50
+        const Color(0xFF065F46), // Emerald 800
+        Icons.cloud_done_rounded,
       ),
       SyncStatus.pendingCreate ||
       SyncStatus.pendingUpdate ||
       SyncStatus.pendingDelete => (
-        const Color(0xFFFFE3D8),
-        const Color(0xFF7E321E),
-        Icons.sync_outlined,
+        const Color(0xFFFFFBEB), // Amber 50
+        const Color(0xFF92400E), // Amber 800
+        Icons.sync_rounded,
       ),
       SyncStatus.syncError => (
         colorScheme.errorContainer,
         colorScheme.onErrorContainer,
-        Icons.error_outline,
+        Icons.error_outline_rounded,
       ),
     };
 
@@ -34,14 +34,15 @@ class SyncStatusBadge extends StatelessWidget {
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: foreground.withOpacity(0.12)),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 15, color: foreground),
-            const SizedBox(width: 6),
+            Icon(icon, size: 14, color: foreground),
+            const SizedBox(width: 4),
             Flexible(
               child: Text(
                 status.label,
@@ -49,6 +50,7 @@ class SyncStatusBadge extends StatelessWidget {
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: foreground,
                   fontWeight: FontWeight.w800,
+                  fontSize: 10,
                 ),
               ),
             ),

@@ -118,7 +118,6 @@ class TaskController extends ChangeNotifier {
       _tasks = await _repository.getTasks();
       _applySyncResult(result);
     } catch (_) {
-      // La sincronizacion automatica no debe interrumpir el flujo offline.
       _syncUiState = SyncUiState.error;
       _syncMessage = 'No se pudo sincronizar. Los cambios siguen locales.';
     } finally {
